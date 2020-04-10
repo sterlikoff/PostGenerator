@@ -1,4 +1,7 @@
+import com.google.gson.GsonBuilder
 import models.Post
+import java.io.File
+import java.io.FileWriter
 
 fun main() {
 
@@ -87,6 +90,12 @@ fun main() {
         )
     )
 
-    println(list.size)
+    val gson = GsonBuilder().create()
+    val str = gson.toJsonTree(list)
+
+    val f = File("1.json")
+    val w = FileWriter(f)
+    w.write(str.toString())
+    w.close()
 
 }
