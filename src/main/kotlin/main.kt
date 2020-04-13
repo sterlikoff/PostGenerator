@@ -1,13 +1,13 @@
 import com.google.gson.GsonBuilder
 import models.Post
 import java.io.File
-import java.io.FileWriter
 
 fun main() {
 
-    val list = mutableListOf<Post>()
+    val mainList = mutableListOf<Post>()
+    val advList = mutableListOf<Post>()
 
-    list.add(
+    mainList.add(
         Post(
             "Is Video and Event Post",
             "Danill Sterlikov",
@@ -21,7 +21,7 @@ fun main() {
         )
     )
 
-    list.add(
+    mainList.add(
         Post(
             "Secondary post with very-very long title. Really very long title.",
             "Ivan Ivanov",
@@ -32,7 +32,7 @@ fun main() {
         )
     )
 
-    list.add(
+    mainList.add(
         Post(
             "Is Event Post",
             "Kolya",
@@ -57,9 +57,9 @@ fun main() {
         "https://www.youtube.com/watch?v=WhWc3b3KhnY"
     )
 
-    list.add(sourcePost)
+    mainList.add(sourcePost)
 
-    list.add(
+    mainList.add(
         Post(
             "Is sharing of previous",
             "Marya Petrosyan",
@@ -74,7 +74,7 @@ fun main() {
         )
     )
 
-    list.add(
+    advList.add(
         Post(
             "Is Advertising",
             "Google",
@@ -91,11 +91,14 @@ fun main() {
     )
 
     val gson = GsonBuilder().create()
-    val str = gson.toJsonTree(list)
 
-    val f = File("1.json")
-    val w = FileWriter(f)
-    w.write(str.toString())
-    w.close()
+    val mainTree = gson.toJsonTree(mainList)
+    val advTree = gson.toJsonTree(advList)
+
+    val mainFile = File("main.json")
+    mainFile.writeText(mainTree.toString())
+
+    val advFile = File("adv.json")
+    advFile.writeText(advTree.toString())
 
 }
